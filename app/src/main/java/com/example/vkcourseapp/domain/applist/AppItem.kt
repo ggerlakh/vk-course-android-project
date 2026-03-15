@@ -1,10 +1,10 @@
-package com.example.vkcourseapp.models
+package com.example.vkcourseapp.domain.applist
 
 import androidx.compose.ui.graphics.painter.Painter
 
-data class AppDetailsDto(
+data class AppItemDto(
     val name: String,
     val description: String,
-    val type: String,
+    val category: String,
     val painter: Painter,
 )
