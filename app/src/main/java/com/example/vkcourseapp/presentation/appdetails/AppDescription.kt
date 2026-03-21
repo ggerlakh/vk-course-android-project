@@ -1,4 +1,4 @@
-package com.example.vkcourseapp.ui.appdetails
+package com.example.vkcourseapp.presentation.appdetails
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.vkcourseapp.R
-import com.example.vkcourseapp.ui.theme.VkCourseAppTheme
+import com.example.vkcourseapp.presentation.theme.VkCourseAppTheme
 
 @Composable
 fun AppDescription(

@@ -1,4 +1,4 @@
-package com.example.vkcourseapp.ui.applist
+package com.example.vkcourseapp.presentation.applist
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,8 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,17 +34,13 @@ fun AppItem(
         .clickable { onClick() }
         .background(Color(0xFFFFFFFF))) {
         Image(
-            painter = appDetailsItem.painter,
+            painter = painterResource(appDetailsItem.iconResId),
             contentDescription = null,
             modifier = Modifier
                 .size(size)
                 .padding(top = 8.dp),
-//            verticalAlignment = Alignment.CenterVertically,
-//            horizontalAlignment = Alignment.CenterHorizontally
         )
         Column(
-//            Modifier
-//            .padding(top = 16.dp)
         ) {
             Text(
                 text = appDetailsItem.name,

@@ -1,4 +1,4 @@
-package com.example.vkcourseapp.ui.appdetails
+package com.example.vkcourseapp.presentation.appdetails
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.vkcourseapp.R
-import com.example.vkcourseapp.ui.theme.VkCourseAppTheme
+import com.example.vkcourseapp.presentation.theme.VkCourseAppTheme
 
 @Composable
 fun Developer(

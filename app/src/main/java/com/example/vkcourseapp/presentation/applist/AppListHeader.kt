@@ -1,37 +1,47 @@
-package com.example.vkcourseapp.ui.applist
+package com.example.vkcourseapp.presentation.applist
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.vkcourseapp.R
 
 
 @Composable
-fun AppListHeader() {
+fun AppListHeader(
+    viewModel: AppListViewModel,
+    snackbarHostState: SnackbarHostState,
+    modifier: Modifier
+) {
+    // Наблюдаем за событиями
+    LaunchedEffect(viewModel.events) {
+        viewModel.events.collect { event ->
+            when(event) {
+                is AppListEvent.ShowSnackbar -> {
+                    snackbarHostState.showSnackbar(event.message)
+                }
+            }
+        }
+    }
+
     Row(
-        Modifier
-            .fillMaxWidth()
-            .height(90.dp)
-            .background(Color(0xFF0077FF)),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
+        modifier
     ) {
         Image(
             painter = painterResource(id = R.drawable.rustore),
             contentDescription = null,
-            modifier = Modifier.size(120.dp)
+            modifier = Modifier.size(120.dp).clickable {
+                viewModel.onImageClick()
+            }
         )
         Spacer(Modifier.weight(1f))
         Image(

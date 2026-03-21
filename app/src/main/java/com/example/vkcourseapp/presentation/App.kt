@@ -1,4 +1,4 @@
-package com.example.vkcourseapp
+package com.example.vkcourseapp.presentation
 
 import com.example.vkcourseapp.domain.appdetails.Category
 

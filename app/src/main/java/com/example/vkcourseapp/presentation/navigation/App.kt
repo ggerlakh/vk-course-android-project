@@ -1,16 +1,18 @@
-package com.example.vkcourseapp.ui.navigation
+package com.example.vkcourseapp.presentation.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.navigation.compose.rememberNavController
-import com.example.vkcourseapp.ui.theme.VkCourseAppTheme
+import com.example.vkcourseapp.presentation.theme.VkCourseAppTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
-import com.example.vkcourseapp.ui.applist.AppListScreen
-import com.example.vkcourseapp.ui.appdetails.AppDetailsScreen
+import com.example.vkcourseapp.presentation.applist.AppListScreen
+import com.example.vkcourseapp.presentation.appdetails.AppDetailsScreen
 import androidx.navigation.compose.composable
+import com.example.vkcourseapp.presentation.applist.AppListViewModel
 
 sealed class Routes(val route: String) {
 
@@ -22,6 +24,7 @@ sealed class Routes(val route: String) {
 fun App() {
     VkCourseAppTheme {
         val navController = rememberNavController()
+        val appListViewModel = viewModel<AppListViewModel>()
 
         Scaffold(
             containerColor = MaterialTheme.colorScheme.background
@@ -37,7 +40,11 @@ fun App() {
                     Передаем лямбду для перехода с домашнего экрана со списком приложений
                     для перехода на экран с карточкой из практики по клику на AppItem
                     */
-                    AppListScreen(onAppClick = { navController.navigate(Routes.AppDetails.route) })
+                    AppListScreen(
+                        onAppClick = { navController.navigate(Routes.AppDetails.route) },
+                        viewModel = appListViewModel
+                    )
+
                 }
 
                 composable(Routes.AppDetails.route) {
