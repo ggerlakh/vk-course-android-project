@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.vkcourseapp.presentation.theme.VkCourseAppTheme
 import com.example.vkcourseapp.domain.appdetails.Category
-import com.example.vkcourseapp.presentation.App
 import com.example.vkcourseapp.R
 import com.example.vkcourseapp.domain.appdetails.AppDetails
 import kotlin.math.roundToInt

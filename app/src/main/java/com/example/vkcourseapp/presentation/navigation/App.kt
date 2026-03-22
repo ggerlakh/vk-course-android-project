@@ -7,6 +7,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import com.example.vkcourseapp.presentation.applist.AppListScreen
@@ -24,7 +25,7 @@ sealed class Routes(val route: String) {
 fun App() {
     VkCourseAppTheme {
         val navController = rememberNavController()
-        val appListViewModel = viewModel<AppListViewModel>()
+        val appListViewModel = hiltViewModel<AppListViewModel>()
 
         Scaffold(
             containerColor = MaterialTheme.colorScheme.background

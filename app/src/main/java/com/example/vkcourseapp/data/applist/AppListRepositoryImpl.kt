@@ -1,9 +1,10 @@
 package com.example.vkcourseapp.data.applist
 
+import javax.inject.Inject
 import com.example.vkcourseapp.domain.applist.AppItem
 import com.example.vkcourseapp.domain.applist.AppListRepository
 
-class AppListRepositoryImpl(
+class AppListRepositoryImpl @Inject constructor(
     private val mapper: AppItemMapper,
     private val api: AppListApi
 ) : AppListRepository {

@@ -1,14 +1,11 @@
 package com.example.vkcourseapp.presentation.applist
 
 import androidx.lifecycle.ViewModel
-import com.example.vkcourseapp.R
-import com.example.vkcourseapp.domain.applist.AppItem
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlin.collections.listOf
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.delay
 import androidx.lifecycle.viewModelScope
@@ -16,19 +13,16 @@ import com.example.vkcourseapp.data.applist.AppItemMapper
 import com.example.vkcourseapp.data.applist.AppListApi
 import com.example.vkcourseapp.data.applist.AppListRepositoryImpl
 import com.example.vkcourseapp.data.applist.CategoryMapper
-import com.example.vkcourseapp.domain.applist.AppListRepository
 import com.example.vkcourseapp.domain.applist.GetAppListUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AppListViewModel : ViewModel() {
+@HiltViewModel
+class AppListViewModel @Inject constructor(
+    private val getAppListUseCase: GetAppListUseCase
+) : ViewModel() {
 
-    // В будущем репозиторий будет создаваться автоматический через инъекцию зависимостей
-    private val getAppListUseCase = GetAppListUseCase(
-        appListRepository = AppListRepositoryImpl(
-            mapper = AppItemMapper(categoryMapper = CategoryMapper()),
-            api = AppListApi()
-        )
-    )
     private val _state = MutableStateFlow<AppListState>(AppListState.Loading)
     val state = _state.asStateFlow()
 

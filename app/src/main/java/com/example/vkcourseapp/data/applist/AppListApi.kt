@@ -2,9 +2,10 @@ package com.example.vkcourseapp.data.applist
 
 import com.example.vkcourseapp.R
 import kotlinx.coroutines.delay
+import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 
-class AppListApi {
+class AppListApi @Inject constructor() {
     suspend fun get(): List<AppItemDto> {
         // Эмулируем загрузку с бэкенда
         delay(2.seconds)

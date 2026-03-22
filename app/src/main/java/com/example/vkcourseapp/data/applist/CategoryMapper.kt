@@ -1,8 +1,9 @@
 package com.example.vkcourseapp.data.applist
 
 import com.example.vkcourseapp.domain.applist.Category
+import javax.inject.Inject
 
-class CategoryMapper {
+class CategoryMapper @Inject constructor() {
     fun toDomain(category: String): Category = when (category) {
         "Финансы" -> Category.FINANCE
         "Инструменты" -> Category.TOOLS
