@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     id("org.jetbrains.kotlin.plugin.serialization")
+    id("com.google.devtools.ksp") version "2.3.6"
 }
 
 android {
@@ -63,4 +64,8 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     implementation("androidx.compose.material:material-icons-extended:1.6.6")
+    implementation("com.google.dagger:hilt-android:2.57.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.57.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.3.0")
+    implementation("androidx.navigation:navigation-compose:1.3.0")
 }
