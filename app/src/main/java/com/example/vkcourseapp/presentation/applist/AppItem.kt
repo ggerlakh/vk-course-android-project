@@ -19,12 +19,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.vkcourseapp.domain.applist.AppItemDto
+import com.example.vkcourseapp.domain.applist.AppItem
 
 
 @Composable
 fun AppItem(
-    appDetailsItem: AppItemDto,
+    appDetailsItem: AppItem,
     size: Dp,
     onClick: () -> Unit,
 ) {
@@ -54,7 +54,7 @@ fun AppItem(
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = appDetailsItem.category,
+                text = appDetailsItem.category.displayName,
                 modifier = Modifier.padding(4.dp),
                 color = Color.Gray
             )

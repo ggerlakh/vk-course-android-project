@@ -20,14 +20,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.vkcourseapp.domain.applist.AppItemDto
+import com.example.vkcourseapp.domain.applist.AppItem
 import com.example.vkcourseapp.presentation.theme.VkCourseAppTheme
 import kotlinx.coroutines.flow.Flow
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.remember
-import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHost
 
 
@@ -59,18 +56,38 @@ fun AppListScreen(
                 )
             }
             AppListState.Error -> {
-                Box(Modifier
-                    .fillMaxSize(), Alignment.Center) {
-                    Text("Ошибка!")
-                }
+                AppListError(
+                    Modifier.fillMaxSize(),
+                    Alignment.Center
+                )
             }
             AppListState.Loading -> {
-                Box(Modifier
-                    .fillMaxSize(), Alignment.Center) {
-                    CircularProgressIndicator()
-                }
+                AppListLoading(
+                    Modifier.fillMaxSize(),
+                    Alignment.Center
+                )
             }
         }
+    }
+}
+
+@Composable
+private fun AppListError(
+    modifier: Modifier,
+    alignment: Alignment
+) {
+    Box(modifier, alignment) {
+        Text("Ошибка!")
+    }
+}
+
+@Composable
+private fun AppListLoading(
+    modifier: Modifier,
+    alignment: Alignment
+) {
+    Box(modifier, alignment) {
+        CircularProgressIndicator()
     }
 }
 
@@ -79,7 +96,7 @@ private fun AppListContent(
     onAppClick: () -> Unit,
     viewModel: AppListViewModel,
     snackbarHostState: SnackbarHostState,
-    appItems: List<AppItemDto>,
+    appItems: List<AppItem>,
     modifier: Modifier
 ) {
     Column(

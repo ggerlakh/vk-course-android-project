@@ -2,7 +2,7 @@ package com.example.vkcourseapp.presentation.applist
 
 import androidx.lifecycle.ViewModel
 import com.example.vkcourseapp.R
-import com.example.vkcourseapp.domain.applist.AppItemDto
+import com.example.vkcourseapp.domain.applist.AppItem
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,9 +12,23 @@ import kotlin.collections.listOf
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.delay
 import androidx.lifecycle.viewModelScope
+import com.example.vkcourseapp.data.applist.AppItemMapper
+import com.example.vkcourseapp.data.applist.AppListApi
+import com.example.vkcourseapp.data.applist.AppListRepositoryImpl
+import com.example.vkcourseapp.data.applist.CategoryMapper
+import com.example.vkcourseapp.domain.applist.AppListRepository
+import com.example.vkcourseapp.domain.applist.GetAppListUseCase
 import kotlinx.coroutines.launch
 
 class AppListViewModel : ViewModel() {
+
+    // В будущем репозиторий будет создаваться автоматический через инъекцию зависимостей
+    private val getAppListUseCase = GetAppListUseCase(
+        appListRepository = AppListRepositoryImpl(
+            mapper = AppItemMapper(categoryMapper = CategoryMapper()),
+            api = AppListApi()
+        )
+    )
     private val _state = MutableStateFlow<AppListState>(AppListState.Loading)
     val state = _state.asStateFlow()
 
@@ -41,7 +55,7 @@ class AppListViewModel : ViewModel() {
                 // Эмулируем загрузку с бэкенда
                 delay(2.seconds)
 
-                val appItemsDto = getAppList()
+                val appItemsDto = getAppListUseCase()
 
                 _state.value = AppListState.Content(
                     appItems = appItemsDto,
@@ -52,67 +66,4 @@ class AppListViewModel : ViewModel() {
         }
     }
 
-    // В будущем заменим этот метод на вызов API.
-    private fun getAppList(): List<AppItemDto> = listOf<AppItemDto>(
-        AppItemDto(
-            iconResId = R.drawable.sber,
-            name = "СберБанк Онлайн - с Салютом",
-            description = "Больше чем банк",
-            category = "Финансы"
-        ),
-        AppItemDto(
-            iconResId = R.drawable.yandex_browser,
-            name = "Яндекс.Браузер - с Алисой",
-            description = "Больше чем банк",
-            category = "Инструменты"
-        ),
-        AppItemDto(
-            iconResId = R.drawable.mailru,
-            name = "Почта Mail.ru",
-            description = "Почтовый клиент для любых ящиков",
-            category = "Инструменты"
-        ),
-        AppItemDto(
-            iconResId = R.drawable.yandex_nav,
-            name = "Яндекс Навигатор",
-            description = "Парковки и заправки - по пути",
-            category = "Транспорт"
-        ),
-        AppItemDto(
-            iconResId = R.drawable.mts,
-            name = "Мой МТС",
-            description = "Парковки и заправки - по пути",
-            category = "Инструменты"
-        ),
-        AppItemDto(
-            iconResId = R.drawable.yandex_alice,
-            name = "Яндекс - с Алисой",
-            description = "Яндекс - поиск всегда под рукой",
-            category = "Инструменты"
-        ),
-        AppItemDto(
-            iconResId = R.drawable.yandex_alice,
-            name = "Яндекс - с Алисой",
-            description = "Яндекс - поиск всегда под рукой",
-            category = "Инструменты"
-        ),
-        AppItemDto(
-            iconResId = R.drawable.yandex_alice,
-            name = "Яндекс - с Алисой",
-            description = "Яндекс - поиск всегда под рукой",
-            category = "Инструменты"
-        ),
-        AppItemDto(
-            iconResId = R.drawable.yandex_alice,
-            name = "Яндекс - с Алисой",
-            description = "Яндекс - поиск всегда под рукой",
-            category = "Инструменты"
-        ),
-        AppItemDto(
-            iconResId = R.drawable.yandex_alice,
-            name = "Яндекс - с Алисой",
-            description = "Яндекс - поиск всегда под рукой",
-            category = "Инструменты"
-        ),
-    )
 }

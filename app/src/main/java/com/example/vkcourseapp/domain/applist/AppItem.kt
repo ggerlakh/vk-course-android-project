@@ -1,9 +1,9 @@
 package com.example.vkcourseapp.domain.applist
 
 
-data class AppItemDto(
+data class AppItem(
     val iconResId: Int,
     val name: String,
     val description: String,
-    val category: String,
+    val category: Category,
 )
