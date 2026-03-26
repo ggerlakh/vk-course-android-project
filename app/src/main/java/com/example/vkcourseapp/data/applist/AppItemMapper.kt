@@ -3,13 +3,12 @@ package com.example.vkcourseapp.data.applist
 import com.example.vkcourseapp.domain.applist.AppItem
 import javax.inject.Inject
 
-class AppItemMapper @Inject constructor(
-    private val categoryMapper: CategoryMapper
-) {
+class AppItemMapper @Inject constructor() {
     fun toDomain(dto: AppItemDto): AppItem = AppItem(
-        iconResId = dto.id,
+        id = dto.id,
         name = dto.name,
         description = dto.description,
-        category = categoryMapper.toDomain(dto.category)
+        category = dto.category,
+        iconUrl = dto.iconUrl,
     )
 }

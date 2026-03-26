@@ -48,8 +48,8 @@ fun AppListHeader(
             painter = painterResource(id = R.drawable.view_comfy_alt_24px),
             contentDescription = null,
             modifier = Modifier
-                .size(40.dp)
-                .padding(end = 20.dp)
+                .size(60.dp)
+                .padding(top = 10.dp, end = 20.dp)
         )
     }
 }

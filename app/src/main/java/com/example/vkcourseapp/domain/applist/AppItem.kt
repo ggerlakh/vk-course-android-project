@@ -2,8 +2,9 @@ package com.example.vkcourseapp.domain.applist
 
 
 data class AppItem(
-    val iconResId: Int,
+    val id: String,
     val name: String,
     val description: String,
-    val category: Category,
+    val category: String,
+    val iconUrl: String,
 )

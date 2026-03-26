@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
 import com.example.vkcourseapp.domain.applist.AppItem
 
 
@@ -33,15 +34,14 @@ fun AppItem(
         .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
         .clickable { onClick() }
         .background(Color(0xFFFFFFFF))) {
-        Image(
-            painter = painterResource(appDetailsItem.iconResId),
+        AsyncImage(
+            model = appDetailsItem.iconUrl,
             contentDescription = null,
             modifier = Modifier
                 .size(size)
                 .padding(top = 8.dp),
         )
-        Column(
-        ) {
+        Column {
             Text(
                 text = appDetailsItem.name,
                 modifier = Modifier.padding(4.dp),
@@ -54,7 +54,7 @@ fun AppItem(
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = appDetailsItem.category.displayName,
+                text = appDetailsItem.category,
                 modifier = Modifier.padding(4.dp),
                 color = Color.Gray
             )

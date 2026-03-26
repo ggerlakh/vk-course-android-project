@@ -28,13 +28,15 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.vkcourseapp.R
 import com.example.vkcourseapp.domain.appdetails.AppDetails
+import com.example.vkcourseapp.presentation.applist.AppListScreen
+import com.example.vkcourseapp.presentation.applist.AppListViewModel
 import com.example.vkcourseapp.presentation.theme.VkCourseAppTheme
 
 @Composable
 fun AppDetailsScreen(
-    modifier: Modifier = Modifier,
+    viewModel: AppDetailsViewModel
 ) {
-    val viewModel = viewModel<AppDetailsViewModel>()
+//    val viewModel = viewModel<AppDetailsViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     when(val currentState = state) {
@@ -94,7 +96,14 @@ private fun AppDetailsContent(
         )
         Spacer(Modifier.height(12.dp))
         ScreenshotsList(
-            screenshotUrlList = appDetails.screenshotUrlList,
+            screenshotUrlList = appDetails.screenshotUrlList ?: emptyList(),
+//            screenshotUrlList = listOf(
+//                "https://fastly.picsum.photos/id/27/200/200.jpg?hmac=CR097EjlzbMVaroKJsDHX-nARM-O-4gnpDICBxhqbEU",
+//                "https://fastly.picsum.photos/id/28/200/200.jpg?hmac=eT-kjSvX_wh2uU3SYgAuRWjzo4ndNGimCCiNEaWlnOg",
+//                "https://fastly.picsum.photos/id/29/200/200.jpg?hmac=555gm3Z1-4AkmdAj9t_Ql-1yIo7bMHpYRRyAz3xqavY",
+//                "https://fastly.picsum.photos/id/30/200/200.jpg?hmac=X-W4F5N4VB42ovwIE4pQzUf-O6pqi2hXB637_jp7rWQ",
+//                "https://fastly.picsum.photos/id/31/200/200.jpg?hmac=tcaVi7pgjpPixCNuHb-sDUNjDMa6eRL9bmVGmOtOaKQ",
+//            ),
             contentPadding = PaddingValues(horizontal = 16.dp),
         )
         Spacer(Modifier.height(12.dp))
@@ -130,8 +139,7 @@ private fun AppDetailsContent(
 @Composable
 private fun Preview() {
     VkCourseAppTheme {
-        AppDetailsScreen(
-            modifier = Modifier.fillMaxSize(),
-        )
+        val appDetailsViewModel = viewModel<AppDetailsViewModel>()
+        AppDetailsScreen(appDetailsViewModel)
     }
 }

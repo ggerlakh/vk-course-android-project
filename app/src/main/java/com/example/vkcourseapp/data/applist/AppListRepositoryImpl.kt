@@ -9,7 +9,7 @@ class AppListRepositoryImpl @Inject constructor(
     private val api: AppListApi
 ) : AppListRepository {
     override suspend fun get(): List<AppItem> {
-        val appsDto = api.get()
+        val appsDto = api.getAppList()
         val appsDomain = appsDto.map { appItemDto ->
             mapper.toDomain(appItemDto)
         }

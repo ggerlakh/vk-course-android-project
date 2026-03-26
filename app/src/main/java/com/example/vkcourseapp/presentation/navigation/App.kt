@@ -14,6 +14,7 @@ import com.example.vkcourseapp.presentation.applist.AppListScreen
 import com.example.vkcourseapp.presentation.appdetails.AppDetailsScreen
 import androidx.navigation.compose.composable
 import com.example.vkcourseapp.presentation.applist.AppListViewModel
+import com.example.vkcourseapp.presentation.appdetails.AppDetailsViewModel
 
 sealed class Routes(val route: String) {
 
@@ -26,6 +27,7 @@ fun App() {
     VkCourseAppTheme {
         val navController = rememberNavController()
         val appListViewModel = hiltViewModel<AppListViewModel>()
+        val appDetailsViewModel = hiltViewModel<AppDetailsViewModel>()
 
         Scaffold(
             containerColor = MaterialTheme.colorScheme.background
@@ -49,7 +51,9 @@ fun App() {
                 }
 
                 composable(Routes.AppDetails.route) {
-                    AppDetailsScreen()
+                    AppDetailsScreen(
+                        viewModel = appDetailsViewModel
+                    )
                 }
             }
         }

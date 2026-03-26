@@ -1,5 +1,6 @@
 package com.example.vkcourseapp.presentation.applist
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
@@ -55,6 +56,7 @@ class AppListViewModel @Inject constructor(
                     appItems = appItemsDto,
                 )
             }.onFailure {
+                Log.d("AppListViewModel", "ERROR : $it")
                 _state.value = AppListState.Error
             }
         }

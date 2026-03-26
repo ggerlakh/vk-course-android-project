@@ -92,6 +92,7 @@ fun AppDetailsHeader(
 fun getCategoryText(category: Category): String = when (category) {
     Category.APP -> stringResource(R.string.category_app)
     Category.GAME -> stringResource(R.string.category_game)
+    else -> "Unknown"
 }
 
 @Preview
