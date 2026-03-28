@@ -30,10 +30,10 @@ enum class Category {
     @SerialName("Видео")
     VIDEO,
 
-    @SerialName("Фотография")
+    @SerialName("Фото и видео")
     PHOTOGRAPHY,
 
-    @SerialName("Здоровье")
+    @SerialName("Здоровье и фитнес")
     HEALTH,
 
     @SerialName("Спорт")
@@ -57,7 +57,7 @@ enum class Category {
     @SerialName("Карты")
     MAPS,
 
-    @SerialName("Еда")
+    @SerialName("Еда и напитки")
     FOOD,
 
     @SerialName("Покупки")

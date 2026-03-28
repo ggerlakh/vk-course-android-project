@@ -28,21 +28,20 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.vkcourseapp.R
 import com.example.vkcourseapp.domain.appdetails.AppDetails
-import com.example.vkcourseapp.presentation.applist.AppListScreen
-import com.example.vkcourseapp.presentation.applist.AppListViewModel
 import com.example.vkcourseapp.presentation.theme.VkCourseAppTheme
 
 @Composable
 fun AppDetailsScreen(
-    viewModel: AppDetailsViewModel
+    viewModel: AppDetailsViewModel,
+    onBackClick: () -> Unit,
 ) {
-//    val viewModel = viewModel<AppDetailsViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     when(val currentState = state) {
         is AppDetailsState.Content -> {
             AppDetailsContent(
-                currentState.appDetails
+                currentState.appDetails,
+                onBackClick,
             )
         }
         AppDetailsState.Error -> {
@@ -63,6 +62,7 @@ fun AppDetailsScreen(
 @Composable
 private fun AppDetailsContent(
     appDetails: AppDetails,
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -72,10 +72,7 @@ private fun AppDetailsContent(
 
     Column(modifier) {
         Toolbar(
-            onBackClick = {
-                // TODO: Открыть предыдущий экран через Jetpack Navigation
-                Toast.makeText(context, underDevelopmentText, Toast.LENGTH_SHORT).show()
-            },
+            onBackClick = onBackClick,
             onShareClick = {
                 Toast.makeText(context, underDevelopmentText, Toast.LENGTH_SHORT).show()
             },
@@ -97,13 +94,6 @@ private fun AppDetailsContent(
         Spacer(Modifier.height(12.dp))
         ScreenshotsList(
             screenshotUrlList = appDetails.screenshotUrlList ?: emptyList(),
-//            screenshotUrlList = listOf(
-//                "https://fastly.picsum.photos/id/27/200/200.jpg?hmac=CR097EjlzbMVaroKJsDHX-nARM-O-4gnpDICBxhqbEU",
-//                "https://fastly.picsum.photos/id/28/200/200.jpg?hmac=eT-kjSvX_wh2uU3SYgAuRWjzo4ndNGimCCiNEaWlnOg",
-//                "https://fastly.picsum.photos/id/29/200/200.jpg?hmac=555gm3Z1-4AkmdAj9t_Ql-1yIo7bMHpYRRyAz3xqavY",
-//                "https://fastly.picsum.photos/id/30/200/200.jpg?hmac=X-W4F5N4VB42ovwIE4pQzUf-O6pqi2hXB637_jp7rWQ",
-//                "https://fastly.picsum.photos/id/31/200/200.jpg?hmac=tcaVi7pgjpPixCNuHb-sDUNjDMa6eRL9bmVGmOtOaKQ",
-//            ),
             contentPadding = PaddingValues(horizontal = 16.dp),
         )
         Spacer(Modifier.height(12.dp))
@@ -140,6 +130,6 @@ private fun AppDetailsContent(
 private fun Preview() {
     VkCourseAppTheme {
         val appDetailsViewModel = viewModel<AppDetailsViewModel>()
-        AppDetailsScreen(appDetailsViewModel)
+        AppDetailsScreen(appDetailsViewModel) {}
     }
 }

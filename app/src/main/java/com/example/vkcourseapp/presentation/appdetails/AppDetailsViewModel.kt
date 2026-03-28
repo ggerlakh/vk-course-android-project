@@ -1,6 +1,7 @@
 package com.example.vkcourseapp.presentation.appdetails
 
 import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vkcourseapp.data.appdetails.AppDetailsRepositoryImpl
@@ -15,8 +16,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AppDetailsViewModel @Inject constructor(
-    private val getAppDetailsUseCase: GetAppDetailsUseCase
+    private val getAppDetailsUseCase: GetAppDetailsUseCase,
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
+
+    val appId: String = savedStateHandle["appId"] ?: ""
 
     private val _state = MutableStateFlow<AppDetailsState>(AppDetailsState.Loading)
     val state = _state.asStateFlow()
@@ -30,8 +34,7 @@ class AppDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             runCatching {
                 _state.value = AppDetailsState.Loading
-                delay(2000L)
-                val app = getAppDetailsUseCase("b7f904a2-2914-4e82-bd03-9f649f6e0115")
+                val app = getAppDetailsUseCase(appId)
                 _state.value = AppDetailsState.Content(app)
             }.onFailure {
                 Log.d("AppDetailsViewModel", "ERROR : $it")

@@ -31,7 +31,7 @@ import androidx.compose.material3.SnackbarHost
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun AppListScreen(
-    onAppClick: () -> Unit,
+    onAppClick: (String) -> Unit,
     viewModel: AppListViewModel
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -93,7 +93,7 @@ private fun AppListLoading(
 
 @Composable
 private fun AppListContent(
-    onAppClick: () -> Unit,
+    onAppClick: (String) -> Unit,
     viewModel: AppListViewModel,
     snackbarHostState: SnackbarHostState,
     appItems: List<AppItem>,

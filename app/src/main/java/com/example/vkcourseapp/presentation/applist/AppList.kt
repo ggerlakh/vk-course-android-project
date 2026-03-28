@@ -11,7 +11,7 @@ import androidx.compose.foundation.lazy.items
 
 @Composable
 fun AppList(
-    onAppClick: () -> Unit,
+    onAppClick: (String) -> Unit,
     appItems: List<AppItem>
     ) {
     LazyColumn(
@@ -21,7 +21,7 @@ fun AppList(
                 AppItem(
                     appDetailsItem = appItemDto,
                     size = 90.dp,
-                    onClick = onAppClick,
+                    onClick = { onAppClick(appItemDto.id) },
                 )
             }
         }
