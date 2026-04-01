@@ -79,7 +79,6 @@ dependencies {
 
     // Kotlinx Serialization (использует KSP)
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-//    ksp("org.jetbrains.kotlinx:kotlinx-serialization-compiler:1.6.0")  // ✅ KSP процессор
 
     // OkHttp (для логирования)
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
@@ -87,5 +86,10 @@ dependencies {
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    // Room
+    implementation("androidx.room:room-runtime:2.8.3")
+    implementation("androidx.room:room-ktx:2.8.3")
+    ksp("androidx.room:room-compiler:2.5.0")
 }
 
