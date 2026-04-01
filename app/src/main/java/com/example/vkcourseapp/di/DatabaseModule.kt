@@ -45,15 +45,4 @@ object DatabaseModule {
     fun provideAppDetailsMapper(): AppDetailsMapper {
         return AppDetailsMapper()
     }
-
-//    @Provides
-//    @Singleton
-//    fun provideAppDetailsRepository(
-//        api: AppApi,
-//        dao: AppDetailsDao,
-//        mapper: AppDetailsMapper,
-//        entityMapper: AppDetailsEntityMapper
-//    ): AppDetailsRepository {
-//        return AppDetailsRepositoryImpl(api, dao, mapper, entityMapper)
-//    }
 }
