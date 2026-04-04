@@ -42,7 +42,7 @@ enum class Category {
     @SerialName("Новости")
     NEWS,
 
-    @SerialName("Книги")
+    @SerialName("Книги и справочники")
     BOOKS,
 
     @SerialName("Бизнес")
@@ -64,5 +64,11 @@ enum class Category {
     SHOPPING,
 
     @SerialName("Утилиты")
-    UTILITIES
+    UTILITIES,
+
+    @SerialName("Погода")
+    WEATHER,
+
+    @SerialName("Образ жизни")
+    LIFESTYLE,
 }

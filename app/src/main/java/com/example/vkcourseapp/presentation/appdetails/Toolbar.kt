@@ -5,12 +5,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.vkcourseapp.presentation.theme.VkCourseAppTheme
 
@@ -18,6 +21,8 @@ import com.example.vkcourseapp.presentation.theme.VkCourseAppTheme
 internal fun Toolbar(
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
+    onFavoriteClick: () -> Unit,
+    isInWishlist: Boolean,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -32,12 +37,35 @@ internal fun Toolbar(
                 tint = MaterialTheme.colorScheme.primary,
             )
         }
-        IconButton(onClick = onShareClick) {
-            Icon(
-                imageVector = Icons.Default.Share,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-            )
+//        IconButton(onClick = onShareClick) {
+//            Icon(
+//                imageVector = Icons.Default.Share,
+//                contentDescription = null,
+//                tint = MaterialTheme.colorScheme.primary,
+//            )
+//        }
+        Row {
+            IconButton(onClick = onFavoriteClick) {
+                if (isInWishlist) {
+                    Icon(
+                        imageVector = Icons.Default.Favorite,
+                        contentDescription = null,
+                        tint = Color.Red,
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.Outlined.FavoriteBorder,
+                        contentDescription = null,
+                    )
+                }
+            }
+            IconButton(onClick = onShareClick) {
+                Icon(
+                    imageVector = Icons.Default.Share,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                )
+            }
         }
     }
 }
@@ -49,6 +77,8 @@ private fun Preview() {
         Toolbar(
             onBackClick = {},
             onShareClick = {},
+            onFavoriteClick = {},
+            isInWishlist = false,
         )
     }
 }

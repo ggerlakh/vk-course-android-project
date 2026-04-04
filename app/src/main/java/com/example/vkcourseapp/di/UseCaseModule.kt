@@ -2,6 +2,8 @@ package com.example.vkcourseapp.di
 
 import com.example.vkcourseapp.domain.appdetails.AppDetailsRepository
 import com.example.vkcourseapp.domain.appdetails.GetAppDetailsUseCase
+import com.example.vkcourseapp.domain.appdetails.ObserveAppDetailsUseCase
+import com.example.vkcourseapp.domain.appdetails.ToggleWishlistAppDetailsUseCase
 import com.example.vkcourseapp.domain.applist.AppListRepository
 import com.example.vkcourseapp.domain.applist.GetAppListUseCase
 import dagger.Module
@@ -20,6 +22,22 @@ object UseCaseModule {
         repository: AppDetailsRepository
     ): GetAppDetailsUseCase {
         return GetAppDetailsUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideObserveAppDetailsUseCase(
+        repository: AppDetailsRepository
+    ): ObserveAppDetailsUseCase {
+        return ObserveAppDetailsUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideToggleWishlistAppDetailsUseCase(
+        repository: AppDetailsRepository
+    ): ToggleWishlistAppDetailsUseCase {
+        return ToggleWishlistAppDetailsUseCase(repository)
     }
 
     @Provides
